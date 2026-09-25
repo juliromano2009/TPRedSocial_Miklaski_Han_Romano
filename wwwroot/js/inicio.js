@@ -1,4 +1,4 @@
-// Cuántas publicaciones ya se muestran (al entrar se muestran las primeras 10)
+// Cuantas publicasiones ya se muestran (al entrar se muestran las primeras 10)
 let desde = 10;
 
 
@@ -77,7 +77,9 @@ function verMas() {
         divPublicaciones.insertAdjacentHTML("beforeend", crearPublicacionHtml(publicacion));
       }
 
-      desde = desde + data.publicaciones.length;
+      for (let i = 0; i < data.publicaciones.length; i++) {
+        desde = desde + 1;
+      }
 
       // Si vinieron menos de 10, ya no quedan más publicaciones
       if (data.publicaciones.length < 10) {

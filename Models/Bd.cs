@@ -46,6 +46,10 @@ public class Bd
             {
                 existe = true;
             }
+            else
+            {
+                existe = false;
+            }
         }
         return existe;
     }
@@ -239,7 +243,7 @@ public class Bd
     {
         bool yaExiste = FijarseSiExisteMeGusta(idPublicacion, idUsuario);
 
-        if (yaExiste)
+        if (yaExiste == true)
         {
             QuitarMeGusta(idPublicacion, idUsuario);
             return false;

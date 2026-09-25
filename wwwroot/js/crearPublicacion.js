@@ -21,7 +21,12 @@ function validarPublicacion() {
     esValido = false;
   }
 
-  return esValido; // Si es false, el formulario no se envía
+  // Si es false, el formulario no se envía
+  if (esValido == true) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function mostrarError(id, msg) {

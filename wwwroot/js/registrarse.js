@@ -58,7 +58,7 @@ function registrarUsuario() {
     mostrarOk("fb-contrasena", "✓ OK");
   }
 
-  if (errores.length > 0) {
+  if (errores.length > 0 && errores.length != 0) {
     divResultado.style.color = "red";
     divResultado.style.border = "1px solid red";
     divResultado.style.padding = "8px";

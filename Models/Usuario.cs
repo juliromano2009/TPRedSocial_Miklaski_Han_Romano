@@ -51,6 +51,13 @@ public class Usuario
             esValido = false;
         }
 
-        return esValido;
+        if (esValido == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

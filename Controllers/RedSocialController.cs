@@ -104,7 +104,16 @@ public class RedSocialController : Controller
         }
 
         int idUsuario = HttpContext.Session.GetInt32("IdUsuario").Value;
-        ViewBag.Publicaciones = Bd.ObtenerPublicaciones(0, CantidadPorPagina, idUsuario);
+        List<Publicacion> publicaciones = Bd.ObtenerPublicaciones(0, CantidadPorPagina, idUsuario);
+
+        // contamos cuantas publicaciones hay
+        int cantidadPublicaciones = 0;
+        foreach (Publicacion p in publicaciones)
+        {
+            cantidadPublicaciones = cantidadPublicaciones + 1;
+        }
+
+        ViewBag.Publicaciones = publicaciones;
 
         return View();
     }
