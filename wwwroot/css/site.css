@@ -1,31 +1,307 @@
+/* ============================================
+   RED SOCIAL - Estilos generales
+   Onda casual, no "corporativa"
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+  font-size: 16px;
 }
 
 body {
+  font-family: 'Quicksand', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  background: #ffe9d6;
+  min-height: 100vh;
   margin-bottom: 60px;
+  color: #3a3a3a;
+  text-align: center;
+  padding: 20px 10px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: #4a4a4a;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+a {
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #e85c50;
+}
+
+/* ============================================
+   Tarjetas / secciones (login, registro, crear publicación)
+   ============================================ */
+
+form#registroForm,
+form[action*="GuardarPublicacion"],
+form[action*="IniciarSesion"] {
+  background: #ffffff;
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 25px 30px;
+  border-radius: 18px;
+  box-shadow: 0 6px 0 #ffb199, 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+form div {
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #5a5a5a;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #ffd6cc;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: #fffaf7;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #ff8a75;
+  background: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Botones */
+input[type="submit"],
+input[type="reset"],
+button {
+  font-family: inherit;
+  font-weight: 700;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+}
+
+input[type="submit"] {
+  background: #ff6f61;
+  color: white;
+  box-shadow: 0 4px 0 #d9503f;
+}
+
+input[type="submit"]:hover {
+  background: #ff8577;
+  transform: translateY(-1px);
+}
+
+input[type="submit"]:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #d9503f;
+}
+
+input[type="reset"] {
+  background: #dfe6e9;
+  color: #555;
+  box-shadow: 0 4px 0 #b2bec3;
+  margin-top: 6px;
+}
+
+input[type="reset"]:hover {
+  background: #eceff1;
+}
+
+/* ============================================
+   Bienvenida
+   ============================================ */
+
+body:has(h2:only-child) p,
+p {
+  line-height: 1.4;
+}
+
+/* ============================================
+   Feed de publicaciones (Inicio)
+   ============================================ */
+
+#publicaciones {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.publicacion {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 0 #ffe0b2, 0 6px 14px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  margin-bottom: 22px;
+  text-align: left;
+  transition: transform 0.15s;
+}
+
+.publicacion:hover {
+  transform: translateY(-3px);
+}
+
+.publicacion img {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.publicacion h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.publicacion p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.publicacion p strong {
+  color: #ff6f61;
+}
+
+/* Botón Me gusta */
+.publicacion button[onclick*="darMeGusta"] {
+  background: #ff6f61;
+  color: white;
+  padding: 8px 18px;
+  margin-right: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 0 #d9503f;
+}
+
+.publicacion button[onclick*="darMeGusta"]:hover {
+  background: #ff8577;
+}
+
+#cantidad-megusta,
+[id^="cantidad-megusta-"] {
+  font-weight: bold;
+  color: #ff6f61;
+}
+
+/* Comentarios */
+.publicacion h4 {
+  font-size: 1rem;
+  margin: 16px 0 8px 0;
+  color: #4a90a4;
+  border-bottom: 2px dashed #d0e8ec;
+  padding-bottom: 6px;
+}
+
+[id^="comentarios-"] {
+  margin-bottom: 12px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+[id^="comentarios-"] p {
+  background: #f2f9fa;
+  border-left: 4px solid #4a90a4;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+[id^="comentarios-"] strong {
+  color: #4a90a4;
+}
+
+[id^="texto-comentario-"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #d0e8ec;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.publicacion button[onclick*="comentar"] {
+  background: #4a90a4;
+  color: white;
+  width: 100%;
+  padding: 9px;
+  box-shadow: 0 3px 0 #35707f;
+}
+
+.publicacion button[onclick*="comentar"]:hover {
+  background: #5aa3b8;
+}
+
+.publicacion hr {
+  border: none;
+  border-top: 2px dashed #eee;
+  margin: 16px 0;
+}
+
+/* Feedback (mensajes de validación) */
+.feedback {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-top: 4px;
+  min-height: 1em;
+}
+
+/* Ver más */
+#btn-ver-mas {
+  background: #ffb347;
+  color: #4a3200;
+  padding: 10px 26px;
+  border-radius: 25px;
+  display: block;
+  margin: 25px auto;
+  box-shadow: 0 4px 0 #d68c1f;
+}
+
+#btn-ver-mas:hover {
+  background: #ffc266;
+}
+
+#fb-ver-mas {
+  font-size: 0.85rem;
+  margin-top: 8px;
 }

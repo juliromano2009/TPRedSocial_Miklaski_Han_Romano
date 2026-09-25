@@ -124,8 +124,6 @@ function crearComentarioHtml(comentario) {
 }
 
 // ---------------- Funciones de ayuda ----------------
-
-// Pasa la fecha que manda C# al formato dd/MM/yyyy HH:mm (igual que en la vista)
 function formatearFecha(fechaTexto) {
   const fecha = new Date(fechaTexto);
   const dia = String(fecha.getDate()).padStart(2, "0");
