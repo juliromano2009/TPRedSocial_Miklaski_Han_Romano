@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Inicio";
+    List<Publicacion> publicaciones = ViewBag.Publicaciones;
+}
+
+<h2>Publicaciones</h2>
+<p>Hola, @Context.Session.GetString("Nombre")! <a href="@Url.Action("CrearPublicacion", "RedSocial")">Crear una publicación</a></p>
+
+<div id="publicaciones">
+    @foreach (Publicacion publicacion in publicaciones)
+    {
+        <div class="publicacion" id="publicacion-@publicacion.Id">
+            <img src="/img/@publicacion.Imagen" alt="@publicacion.Titulo" width="300">
+            <h3>@publicacion.Titulo</h3>
+            <p>@publicacion.Descripcion</p>
+            <p>Publicado por <strong>@publicacion.NombreUsuario</strong> el @publicacion.FechaPublicacion.ToString("dd/MM/yyyy HH:mm")</p>
+
+            <button id="btn-megusta-@publicacion.Id" onclick="darMeGusta(@publicacion.Id)">
+                @(publicacion.UsuarioActualDioMeGusta ? "Ya no me gusta" : "Me gusta")
+            </button>
+            <span id="cantidad-megusta-@publicacion.Id">@publicacion.CantidadMeGusta</span> Me gusta
+
+            <h4>Comentarios</h4>
+            <div id="comentarios-@publicacion.Id">
+                @foreach (Comentario comentario in publicacion.Comentarios)
+                {
+                    <p><strong>@comentario.NombreUsuario</strong> (@comentario.FechaComentario.ToString("dd/MM/yyyy HH:mm")): @comentario.Texto</p>
+                }
+            </div>
+
+            <input type="text" id="texto-comentario-@publicacion.Id" placeholder="Escribí un comentario">
+            <button onclick="comentar(@publicacion.Id)">Comentar</button>
+            <p id="fb-comentario-@publicacion.Id" class="feedback"></p>
+            <hr>
+        </div>
+    }
+</div>
+
+@if (publicaciones.Count == 0)
+{
+    <p>Todavía no hay publicaciones.</p>
+}
+
+@* Si vinieron menos de 10 ya no hay más para mostrar, así que el botón arranca oculto *@
+<button id="btn-ver-mas" onclick="verMas()" style="@(publicaciones.Count < 10 ? "display:none" : "")">Ver más</button>
+<p id="fb-ver-mas" class="feedback"></p>
+
+<script src="/js/inicio.js"></script>

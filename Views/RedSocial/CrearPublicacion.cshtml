@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Crear publicación";
+}
+
+<h2>Crear publicación</h2>
+<form action='@Url.Action("GuardarPublicacion", "RedSocial")' method="post" onsubmit="return validarPublicacion()">
+    <div>
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" maxlength="200" placeholder="Mi viaje a Bariloche">
+        <p id="fb-titulo" class="feedback"></p>
+    </div>
+
+    <div>
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="40"></textarea>
+        <p id="fb-descripcion" class="feedback"></p>
+    </div>
+
+    <div>
+        <label for="imagen">Imagen (nombre del archivo en wwwroot/img):</label><br>
+        <input type="text" id="imagen" name="imagen" maxlength="50" placeholder="bariloche.jpg">
+        <p id="fb-imagen" class="feedback"></p>
+    </div>
+
+    <input type="submit" value="Publicar">
+</form>
+
+<p>@ViewBag.ErrorMessage</p>
+<p><a href="@Url.Action("Inicio", "RedSocial")">Volver al inicio</a></p>
+
+<script src="/js/crearPublicacion.js"></script>
