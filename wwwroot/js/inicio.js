@@ -1,7 +1,6 @@
 // Cuántas publicaciones ya se muestran (al entrar se muestran las primeras 10)
 let desde = 10;
 
-// ---------------- Me Gusta ----------------
 
 function darMeGusta(idPublicacion) {
   const datos = new FormData();
@@ -23,10 +22,6 @@ function darMeGusta(idPublicacion) {
         document.getElementById("btn-megusta-" + idPublicacion).innerHTML = "Me gusta";
       }
     })
-    .catch(error => {
-      console.log(error);
-      alert("Hubo un error al dar Me gusta.");
-    });
 }
 
 // ---------------- Comentarios ----------------
@@ -96,9 +91,6 @@ function verMas() {
     });
 }
 
-// ---------------- Armado del HTML ----------------
-// Tiene que quedar igual a lo que arma Inicio.cshtml
-
 function crearPublicacionHtml(publicacion) {
   let comentariosHtml = "";
   for (const comentario of publicacion.comentarios) {
@@ -110,24 +102,21 @@ function crearPublicacionHtml(publicacion) {
     textoBoton = "Ya no me gusta";
   }
 
-  return `
-    <div class="publicacion" id="publicacion-${publicacion.id}">
-      <img src="/img/${escaparHtml(publicacion.imagen)}" alt="${escaparHtml(publicacion.titulo)}" width="300">
-      <h3>${escaparHtml(publicacion.titulo)}</h3>
-      <p>${escaparHtml(publicacion.descripcion)}</p>
-      <p>Publicado por <strong>${escaparHtml(publicacion.nombreUsuario)}</strong> el ${formatearFecha(publicacion.fechaPublicacion)}</p>
-
-      <button id="btn-megusta-${publicacion.id}" onclick="darMeGusta(${publicacion.id})">${textoBoton}</button>
-      <span id="cantidad-megusta-${publicacion.id}">${publicacion.cantidadMeGusta}</span> Me gusta
-
-      <h4>Comentarios</h4>
-      <div id="comentarios-${publicacion.id}">${comentariosHtml}</div>
-
-      <input type="text" id="texto-comentario-${publicacion.id}" placeholder="Escribí un comentario">
-      <button onclick="comentar(${publicacion.id})">Comentar</button>
-      <p id="fb-comentario-${publicacion.id}" class="feedback"></p>
-      <hr>
-    </div>`;
+  return [
+    `<div class="publicacion" id="publicacion-${publicacion.id}">`,
+    `<img src="/img/${escaparHtml(publicacion.imagen)}" alt="${escaparHtml(publicacion.titulo)}" width="300">`,
+    `<h3>${escaparHtml(publicacion.titulo)}</h3>`,
+    `<p>${escaparHtml(publicacion.descripcion)}</p>`,
+    `<p>Publicado por <strong>${escaparHtml(publicacion.nombreUsuario)}</strong> el ${formatearFecha(publicacion.fechaPublicacion)}</p>`,
+    `<button id="btn-megusta-${publicacion.id}" onclick="darMeGusta(${publicacion.id})">${textoBoton}</button>`,
+    `<span id="cantidad-megusta-${publicacion.id}">${publicacion.cantidadMeGusta}</span> Me gusta`,
+    `<h4>Comentarios</h4>`,
+    `<div id="comentarios-${publicacion.id}">${comentariosHtml}</div>`,
+    `<input type="text" id="texto-comentario-${publicacion.id}" placeholder="Escribí un comentario">`,
+    `<button onclick="comentar(${publicacion.id})">Comentar</button>`,
+    `<p id="fb-comentario-${publicacion.id}" class="feedback"></p>`,
+    `<hr></div>`
+  ].join("");
 }
 
 function crearComentarioHtml(comentario) {
@@ -141,11 +130,8 @@ function formatearFecha(fechaTexto) {
   const fecha = new Date(fechaTexto);
   const dia = String(fecha.getDate()).padStart(2, "0");
   const mes = String(fecha.getMonth() + 1).padStart(2, "0");
-  const anio = fecha.getFullYear();
-  const horas = String(fecha.getHours()).padStart(2, "0");
-  const minutos = String(fecha.getMinutes()).padStart(2, "0");
 
-  return dia + "/" + mes + "/" + anio + " " + horas + ":" + minutos;
+  return dia + "/" + mes;
 }
 
 // Evita que si alguien escribe HTML en un comentario (ej: <script>) se ejecute en la página
@@ -161,8 +147,8 @@ function mostrarError(id, msg) {
   el.style.color = "red";
 }
 
-function mostrarOk(id, msg) {
+function mostrarOk(id, mensaje) {
   const el = document.getElementById(id);
-  el.innerHTML = msg;
+  el.innerHTML = mensaje;
   el.style.color = "green";
 }
